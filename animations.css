@@ -1,0 +1,349 @@
+/* =============================================================================
+   ANIMATIONS - Keyframes, transitions, and scroll-reveal effects
+   ============================================================================= */
+
+/* ===== SCROLL REVEAL ANIMATIONS ===== */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation for grid items */
+.project-card,
+.research__card {
+    --animation-order: 0;
+}
+
+.project-card:nth-child(1) {
+    --animation-order: 1;
+}
+
+.project-card:nth-child(2) {
+    --animation-order: 2;
+}
+
+.project-card:nth-child(3) {
+    --animation-order: 3;
+}
+
+.project-card:nth-child(4) {
+    --animation-order: 4;
+}
+
+.project-card:nth-child(5) {
+    --animation-order: 5;
+}
+
+.project-card:nth-child(6) {
+    --animation-order: 6;
+}
+
+[data-animate].is-visible.project-card,
+[data-animate].is-visible.research__card {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== HERO DNA ANIMATION ===== */
+@keyframes rotate-dna {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero__dna {
+    animation: rotate-dna 60s linear infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.15);
+    }
+}
+
+.hero__network {
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* ===== BUTTON RIPPLE EFFECT ===== */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ===== CARD HOVER EFFECTS ===== */
+@keyframes cardLift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+.card:hover,
+.research__card:hover,
+.project-card:hover {
+    animation: cardLift 0.3s ease-out forwards;
+}
+
+/* ===== LOADING SPINNER ===== */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn__icon--loading {
+    animation: spin 1s linear infinite;
+}
+
+/* ===== SHIMMER EFFECT (for loading states) ===== */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg,
+            var(--color-gray-200) 0%,
+            var(--color-gray-100) 50%,
+            var(--color-gray-200) 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+[data-theme="dark"] .skeleton {
+    background: linear-gradient(90deg,
+            #2a2a2a 0%,
+            #1e1e1e 50%,
+            #2a2a2a 100%);
+    background-size: 1000px 100%;
+}
+
+/* ===== THEME TOGGLE ANIMATION ===== */
+.theme-toggle.rotating {
+    animation: rotate360 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== SMOOTH COLOR TRANSITIONS FOR THEME ===== */
+body,
+header,
+.navbar__logo,
+.card,
+.btn,
+.badge,
+.tag,
+.research__card,
+.project-card {
+    transition: background-color var(--transition-base),
+        color var(--transition-base),
+        border-color var(--transition-base);
+}
+
+/* ===== FOCUS ANIMATIONS ===== */
+:focus-visible {
+    outline: 2px solid var(--color-accent-blue);
+    outline-offset: 2px;
+    transition: outline-offset var(--transition-fast);
+}
+
+:focus-visible:active {
+    outline-offset: 0;
+}
+
+/* ===== SCROLL PROGRESS BAR (optional) ===== */
+.scroll-progress {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary-700), var(--color-accent-blue));
+    z-index: var(--z-fixed);
+    transition: width 0.1s ease-out;
+}
+
+/* ===== PARALLAX EFFECT ===== */
+.parallax {
+    transform: translateY(calc(var(--scroll-y) * 0.3px));
+}
+
+/* ===== FADE IN ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* ===== SLIDE IN ANIMATIONS ===== */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== SCALE ANIMATIONS ===== */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== BOUNCE ANIMATION ===== */
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+/* ===== REDUCE MOTION PREFERENCE ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    [data-animate] {
+        opacity: 1;
+        transform: none;
+    }
+
+    .parallax {
+        transform: none;
+    }
+}

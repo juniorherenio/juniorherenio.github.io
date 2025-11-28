@@ -1,0 +1,49 @@
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+*~
+
+# Build outputs (if added in future)
+dist/
+build/
+.cache/
+
+# Dependencies (if added in future)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+*.test.js
+*.spec.js
+
+# Backup files
+*.bak
+*.backup
+
+# Image originals/unoptimized
+*.psd
+*.ai
+*.sketch
+
+# Documentation drafts
+drafts/
+notes.txt
